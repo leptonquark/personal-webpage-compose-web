@@ -1,13 +1,9 @@
-import kotlinx.browser.document
-import react.create
-import react.dom.client.createRoot
+import di.ClientComponent
+import di.create
+
 
 fun main() {
-    val container = document.createElement("div")
-    document.body!!.appendChild(container)
-
-    val welcome = Welcome.create {
-        name = "Kotlin/JS"
-    }
-    createRoot(container).render(welcome)
+    val component = ClientComponent::class.create()
+    val startScreen = component.startScreen
+    startScreen.initialize()
 }
