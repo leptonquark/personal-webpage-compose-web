@@ -12,15 +12,6 @@ repositories {
 }
 
 kotlin {
-    jvm {
-        jvmToolchain(8)
-        withJava()
-        testRuns.named("test") {
-            executionTask.configure {
-                useJUnitPlatform()
-            }
-        }
-    }
     js {
         binaries.executable()
         browser {
@@ -28,20 +19,12 @@ kotlin {
                 cssSupport {
                     enabled.set(true)
                 }
+                outputFileName = "personal-webpage.js"
             }
         }
     }
     sourceSets {
         val commonMain by getting
-        val commonTest by getting
-        val jvmMain by getting {
-            dependencies {
-                implementation("io.ktor:ktor-server-netty:2.3.2")
-                implementation("io.ktor:ktor-server-html-builder-jvm:2.3.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
-            }
-        }
-        val jvmTest by getting
         val jsMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
@@ -49,20 +32,6 @@ kotlin {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
             }
         }
-        val jsTest by getting
     }
 }
 
-application {
-    mainClass.set("me.leptonquark.application.ServerKt")
-}
-
-tasks.named<Copy>("jvmProcessResources") {
-    val jsBrowserDistribution = tasks.named("jsBrowserDistribution")
-    from(jsBrowserDistribution)
-}
-
-tasks.named<JavaExec>("run") {
-    dependsOn(tasks.named<Jar>("jvmJar"))
-    classpath(tasks.named<Jar>("jvmJar"))
-}
