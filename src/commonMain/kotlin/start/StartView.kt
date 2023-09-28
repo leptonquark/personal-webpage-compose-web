@@ -7,11 +7,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import start.contactme.ContactMeItem
 import ui.theme.AppTheme
 
 
 @Composable
-internal fun StartView(name: String, emailAddress: String, contactMeItems: List<Pair<String, String>>) {
+internal fun StartView(name: String, emailAddress: String, contactMeItems: Set<ContactMeItem>) {
     AppTheme {
         Box(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface),

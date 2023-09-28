@@ -19,15 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import start.contactme.ContactMeItem
+import start.contactme.ContactMeView
 import ui.theme.Spacing
 import ui.theme.TextContent
 
 @Composable
-internal fun ProfileView(
-    name: String,
-    emailAddress: String,
-    contactMeItems: List<Pair<String, String>>,
-) {
+internal fun ProfileView(name: String, emailAddress: String, contactMeItems: Set<ContactMeItem>) {
     Column(
         modifier = Modifier.width(IntrinsicSize.Min),
         horizontalAlignment = Alignment.CenterHorizontally,

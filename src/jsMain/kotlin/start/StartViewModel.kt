@@ -7,11 +7,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
+import start.contactme.ContactMeItem
 
 data class StartState(
     val name: String = "",
     val emailAddress: String = "",
-    val contactMeItems: List<Pair<String, String>> = emptyList(),
+    val contactMeItems: Set<ContactMeItem> = emptySet(),
 )
 
 data object StartIntent
@@ -26,10 +27,10 @@ class StartViewModel @Inject constructor() {
         emit(StartState(
             name = "Justin Salér",
             emailAddress = "justin.saler.r@gmail.com",
-            contactMeItems = listOf(
-                "images/github.png" to "@leptonquark",
-                "images/linkedin.png" to "@justinsaler",
-                "images/twitter.png" to "@leetkingen",
+            contactMeItems = setOf(
+                ContactMeItem.GitHub("leptonquark"),
+                ContactMeItem.LinkedIn("justinsaler"),
+                ContactMeItem.Twitter("leetkingen"),
             ),
         ))
     }.stateIn(

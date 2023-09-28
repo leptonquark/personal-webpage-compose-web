@@ -1,4 +1,4 @@
-package start
+package start.contactme
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,13 +10,19 @@ import androidx.compose.ui.Alignment
 import ui.TintedImage
 import ui.theme.Spacing
 
-
 @Composable
-internal fun ContactMeView(contactMeItems: List<Pair<String, String>>) {
+internal fun ContactMeView(contactMeItems: Set<ContactMeItem>) {
     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
-        contactMeItems.forEach { (icon, profileName) -> ContactMeIcon(icon, profileName) }
+        contactMeItems.forEach { ContactMeIcon(it.icon, it.profileName) }
     }
 }
+
+private val ContactMeItem.icon: String
+    get() = when(this){
+        is ContactMeItem.GitHub -> "images/github.png"
+        is ContactMeItem.LinkedIn -> "images/linkedin.png"
+        is ContactMeItem.Twitter -> "images/twitter.png"
+    }
 
 @Composable
 private fun ContactMeIcon(icon: String, profileName: String) {
