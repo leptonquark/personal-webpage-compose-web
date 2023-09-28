@@ -11,14 +11,7 @@ import ui.theme.AppTheme
 
 
 @Composable
-internal fun StartView() {
-    val name = "Justin Salér"
-    val emailAddress = "justin.saler.r@gmail.com"
-    val contactMeItems = listOf(
-        "images/github.png" to "@leptonquark",
-        "images/linkedin.png" to "@justinsaler",
-        "images/twitter.png" to "@leetkingen",
-    )
+internal fun StartView(name: String, emailAddress: String, contactMeItems: List<Pair<String, String>>) {
     AppTheme {
         Box(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface),

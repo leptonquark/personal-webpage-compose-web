@@ -16,7 +16,11 @@ class StartScreen @Inject constructor(private val viewModel: StartViewModel) {
         onWasmReady {
             CanvasBasedWindow("CV") {
                 val state by viewModel.state.collectAsState()
-                StartView()
+                StartView(
+                    name = state.name,
+                    emailAddress = state.emailAddress,
+                    contactMeItems = state.contactMeItems,
+                )
             }
         }
     }

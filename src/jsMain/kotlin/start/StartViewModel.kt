@@ -8,7 +8,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
 
-data object StartState
+data class StartState(
+    val name: String = "",
+    val emailAddress: String = "",
+    val contactMeItems: List<Pair<String, String>> = emptyList(),
+)
 
 data object StartIntent
 
@@ -19,11 +23,19 @@ class StartViewModel @Inject constructor() {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
     val state = flow {
-        emit(StartState)
+        emit(StartState(
+            name = "Justin Salér",
+            emailAddress = "justin.saler.r@gmail.com",
+            contactMeItems = listOf(
+                "images/github.png" to "@leptonquark",
+                "images/linkedin.png" to "@justinsaler",
+                "images/twitter.png" to "@leetkingen",
+            ),
+        ))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
-        initialValue = StartState
+        initialValue = StartState()
     )
 
     fun sendIntent(intent: StartIntent) = Unit
