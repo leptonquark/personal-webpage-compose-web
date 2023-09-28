@@ -20,10 +20,12 @@ class StartScreen @Inject constructor(private val viewModel: StartViewModel) {
                     name = state.name,
                     emailAddress = state.emailAddress,
                     contactMeItems = state.contactMeItems,
+                    onContactMeItemClick = { sendIntent(StartIntent.ContactMeItemClick(it)) },
+                    onDownloadResumeClick = { sendIntent(StartIntent.DownloadResumeClick) },
                 )
             }
         }
     }
 
-    private fun sendIntent(state: StartIntent) = viewModel.sendIntent(state)
+    private fun sendIntent(intent: StartIntent) = viewModel.sendIntent(intent)
 }

@@ -12,13 +12,25 @@ import ui.theme.AppTheme
 
 
 @Composable
-internal fun StartView(name: String, emailAddress: String, contactMeItems: Set<ContactMeItem>) {
+internal fun StartView(
+    name: String,
+    emailAddress: String,
+    contactMeItems: Set<ContactMeItem>,
+    onContactMeItemClick: (ContactMeItem) -> Unit,
+    onDownloadResumeClick: () -> Unit,
+) {
     AppTheme {
         Box(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface),
             contentAlignment = Alignment.Center,
         ) {
-            ProfileView(name, emailAddress, contactMeItems)
+            ProfileView(
+                name = name,
+                emailAddress = emailAddress,
+                contactMeItems = contactMeItems,
+                onContactMeItemClick = onContactMeItemClick,
+                onDownloadResumeClick = onDownloadResumeClick,
+            )
         }
     }
 }
