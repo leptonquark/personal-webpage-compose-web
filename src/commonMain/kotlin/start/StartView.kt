@@ -32,6 +32,11 @@ import ui.theme.TextContent
 internal fun StartView() {
     val name = "Justin Salér"
     val emailAddress = "justin.saler.r@gmail.com"
+    val contactMeItems = listOf(
+        "images/github.png" to "@leptonquark",
+        "images/linkedin.png" to "@justinsaler",
+        "images/twitter.png" to "@leetkingen",
+    )
     AppTheme {
         Box(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface),
@@ -62,9 +67,7 @@ internal fun StartView() {
                     }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
-                    ContactMeIcon("images/github.png", "@leptonquark")
-                    ContactMeIcon("images/linkedin.png", "@justinsaler")
-                    ContactMeIcon("images/twitter.png", "@leetkingen")
+                    contactMeItems.forEach { (icon, profileName) -> ContactMeIcon(icon, profileName) }
                 }
                 DownloadResumeButton()
             }
