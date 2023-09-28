@@ -27,7 +27,6 @@ import ui.theme.Spacing
 import ui.theme.TextContent
 
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun StartView() {
     val name = "Justin Salér"
