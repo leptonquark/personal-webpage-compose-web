@@ -1,6 +1,7 @@
 package start
 
 import di.Singleton
+import file.FileDownloadHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,9 +23,13 @@ sealed interface StartIntent {
     data object DownloadResumeClick : StartIntent
 }
 
+private const val RESUME_URL = "/images/profile.png"
 
 @Singleton
-class StartViewModel @Inject constructor(private val externalUrlHandler: ExternalUrlHandler) {
+class StartViewModel @Inject constructor(
+    private val externalUrlHandler: ExternalUrlHandler,
+    private val fileDownloadHandler: FileDownloadHandler,
+) {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
     val state = flow {
@@ -47,6 +52,6 @@ class StartViewModel @Inject constructor(private val externalUrlHandler: Externa
 
     fun sendIntent(intent: StartIntent) = when(intent){
         is StartIntent.ContactMeItemClick -> externalUrlHandler.navigateTo(intent.item.url)
-        StartIntent.DownloadResumeClick -> TODO()
+        StartIntent.DownloadResumeClick -> fileDownloadHandler.download(RESUME_URL)
     }
 }
