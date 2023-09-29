@@ -1,5 +1,6 @@
 package start
 
+import config.ConfigRepository
 import di.Singleton
 import file.FileDownloadHandler
 import kotlinx.coroutines.CoroutineScope
@@ -23,10 +24,11 @@ sealed interface StartIntent {
     data object DownloadResumeClick : StartIntent
 }
 
-private const val RESUME_URL = "/images/profile.png"
+private const val RESUME_URL = "/resume.pdf"
 
 @Singleton
 class StartViewModel @Inject constructor(
+    private val configRepository: ConfigRepository,
     private val externalUrlHandler: ExternalUrlHandler,
     private val fileDownloadHandler: FileDownloadHandler,
 ) {
@@ -35,13 +37,9 @@ class StartViewModel @Inject constructor(
     val state = flow {
         emit(
             StartState(
-                name = "Justin Salér",
-                emailAddress = "justin.saler.r@gmail.com",
-                contactMeItems = setOf(
-                    ContactMeItem.GitHub("leptonquark"),
-                    ContactMeItem.LinkedIn("justinsaler"),
-                    ContactMeItem.Twitter("leetkingen"),
-                ),
+                name = configRepository.name,
+                emailAddress = configRepository.email,
+                contactMeItems = configRepository.contactMeItems,
             )
         )
     }.stateIn(
