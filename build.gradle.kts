@@ -67,7 +67,7 @@ kotlin {
                 implementation(libs.inject.runtime)
                 implementation(libs.bundles.ktor.js)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
-
+                implementation(npm("firebase", "10.4.0"))
             }
         }
         val wasmMain by getting {
