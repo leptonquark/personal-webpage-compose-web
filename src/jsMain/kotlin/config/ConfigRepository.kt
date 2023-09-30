@@ -6,7 +6,6 @@ import io.ktor.client.request.get
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Inject
-import start.contactme.ContactMeItem
 
 @Serializable
 data class Config(

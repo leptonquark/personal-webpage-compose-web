@@ -53,29 +53,9 @@ class StartViewModel @Inject constructor(
     private fun Config.getStartState() = StartState(
         name = name,
         emailAddress = email,
-        contactMeItems = contactMe.mapNotNull { url -> getContactMeItemOrNull(url) }.toSet(),
-        )
+        contactMeItems = contactMe.mapNotNull { url -> ContactMeItem.fromUrl(url) }.toSet(),
+    )
 
-    private fun getContactMeItemOrNull(url: String) : ContactMeItem? {
-        val patterns = mapOf(
-            "LinkedIn" to Regex("https://www\\.linkedin\\.com/in/([^/]+)"),
-            "GitHub" to Regex("https://github\\.com/([^/]+)"),
-            "Twitter" to Regex("https://twitter\\.com/([^/]+)")
-        )
-
-        val (platform, userName) = patterns.entries.firstNotNullOfOrNull { (platform, pattern) ->
-            pattern.find(url)?.run { platform to groupValues[1] }
-        } ?: (null to null)
-
-        return userName?.let {
-            when (platform) {
-                "GitHub" -> ContactMeItem.GitHub(it)
-                "LinkedIn" -> ContactMeItem.LinkedIn(it)
-                "Twitter" -> ContactMeItem.Twitter(it)
-                else -> null
-            }
-        }
-    }
 }
 
 
