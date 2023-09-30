@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     application
 }
@@ -64,6 +65,7 @@ kotlin {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
                 implementation(libs.inject.runtime)
+                implementation(libs.bundles.ktor.js)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
 
             }

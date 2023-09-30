@@ -1,15 +1,19 @@
 package config
 
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import kotlinx.coroutines.flow.flow
+import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Inject
-import start.contactme.ContactMeItem
 
-class ConfigRepository @Inject constructor() {
+@Serializable
+data class Config(
+    val name: String,
+    val email: String,
+    val contactMe: List<String>,
+)
 
-    val name: String = "Justin Salér"
-    val email: String = "justin.saler.r@gmail.com"
-    val contactMeItems = setOf(
-        ContactMeItem.GitHub("leptonquark"),
-        ContactMeItem.LinkedIn("justinsaler"),
-        ContactMeItem.Twitter("leetkingen"),
-    )
+class ConfigRepository @Inject constructor(private val client: HttpClient) {
+    val config = flow { emit(client.get("config.json").body<Config>()) }
 }
