@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/processedResources/js/main",
+    "public": "build/dist/js/developmentExecutable",
     "ignore": [
       "firebase.json",
       "**/.*",
