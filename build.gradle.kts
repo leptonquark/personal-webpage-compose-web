@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.ir.DefaultIncrementalSyncTask
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -93,6 +95,22 @@ compose {
 detekt {
     config.setFrom("detekt-config.yml")
     source.setFrom("src/commonMain/kotlin", "src/wasmMain/kotlin")
+}
+
+
+
+project.tasks.whenTaskAdded {
+    if (name == "compileCommonMainKotlinMetadata") {
+        enabled = false
+    }
+}
+
+tasks.named<KotlinWebpack>("jsBrowserProductionWebpack") {
+    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmProductionExecutableCompileSync"))
+}
+
+tasks.named<Copy>("wasmBrowserProductionExecutableDistributeResources") {
+    dependsOn(tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync"))
 }
 
 
