@@ -17,9 +17,10 @@ version = "1.0"
 repositories {
     google()
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
 }
 
 kotlin {
@@ -36,7 +37,7 @@ kotlin {
         }
     }
     @OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
-    wasm {
+    wasmJs {
         moduleName = "personal-webpage"
         browser {
             commonWebpackConfig {
@@ -63,15 +64,12 @@ kotlin {
         }
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
                 implementation(libs.inject.runtime)
                 implementation(libs.bundles.ktor.js)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
         }
-        val wasmMain by getting {
+        val wasmJsMain by getting {
             dependencies {
                 implementation(libs.serialization.wasm)
             }
@@ -88,7 +86,7 @@ compose {
     experimental {
         web.application
     }
-    kotlinCompilerPlugin.set(libs.versions.compose.get())
+    kotlinCompilerPlugin.set(libs.versions.composecompiler.get())
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
@@ -106,11 +104,17 @@ project.tasks.whenTaskAdded {
 }
 
 tasks.named<KotlinWebpack>("jsBrowserProductionWebpack") {
-    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmProductionExecutableCompileSync"))
+    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmJsProductionExecutableCompileSync"))
 }
 
-tasks.named<Copy>("wasmBrowserProductionExecutableDistributeResources") {
+tasks.named<Copy>("wasmJsBrowserProductionExecutableDistributeResources") {
     dependsOn(tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync"))
 }
 
-
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.module.name.startsWith("kotlin-stdlib")) {
+            useVersion(libs.versions.kotlin.get())
+        }
+    }
+}
