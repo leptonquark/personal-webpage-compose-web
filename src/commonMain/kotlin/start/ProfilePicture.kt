@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import ui.theme.ImageSize
+import ui.theme.size.ImageSize
 
 private const val PROFILE_PICTURE = "images/profile.png"
 
