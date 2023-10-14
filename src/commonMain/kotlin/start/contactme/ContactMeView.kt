@@ -13,7 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ui.TintedImage
-import ui.theme.Spacing
+import ui.theme.size.Spacing
 
 @Composable
 internal fun ContactMeView(contactMeItems: Set<ContactMeItem>, onContactMeItemClick: (ContactMeItem) -> Unit) {

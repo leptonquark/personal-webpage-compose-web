@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import ui.theme.IconSize
+import ui.theme.size.IconSize
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable

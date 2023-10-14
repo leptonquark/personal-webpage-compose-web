@@ -1,4 +1,4 @@
-package ui.theme
+package ui.theme.size
 
 import androidx.compose.ui.unit.dp
 

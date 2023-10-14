@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import start.contactme.ContactMeItem
 import start.contactme.ContactMeView
-import ui.theme.Spacing
+import ui.theme.size.Spacing
 import ui.theme.TextContent
 
 @Composable
@@ -73,7 +73,7 @@ private fun DownloadResumeButton(onClick: () -> Unit) {
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(Spacing.XS)) {
             Icon(Icons.Filled.Download, contentDescription = null)
-            Text(TextContent.DownloadResume)
+            Text(TextContent.DOWNLOAD_RESUME)
         }
     }
 }

@@ -1,5 +1,5 @@
 package ui.theme
 
 object TextContent {
-    const val DownloadResume = "Download Resumé"
+    const val DOWNLOAD_RESUME = "Download Resumé"
 }
