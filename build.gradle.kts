@@ -16,6 +16,7 @@ version = "1.0"
 
 repositories {
     google()
+    gradlePluginPortal()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
     maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
