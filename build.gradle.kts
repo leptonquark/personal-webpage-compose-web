@@ -57,7 +57,10 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.ui)
                 implementation(compose.foundation)
-                implementation(compose.material3)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.material3) {
+                    exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-wasm")
+                }
                 implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
@@ -93,7 +96,7 @@ compose {
 
 detekt {
     config.setFrom("detekt-config.yml")
-    source.setFrom("src/commonMain/kotlin", "src/wasmMain/kotlin")
+    source.setFrom("src/commonMain/kotlin", "src/wasmJsMain/kotlin")
 }
 
 
