@@ -58,9 +58,7 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.material3) {
-                    exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib-wasm")
-                }
+                implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
@@ -119,6 +117,11 @@ configurations.all {
     resolutionStrategy.eachDependency {
         if (requested.module.name.startsWith("kotlin-stdlib")) {
             useVersion(libs.versions.kotlin.get())
+        }
+        // kotlinx-datetime-wasm-js:0.4.1-wasm0 depends on outdated kotlinx-serialization-core:1.5.2-wasm0
+
+        if (requested.module.name.contains("kotlinx-serialization") && requested.version == "1.5.2-wasm0") {
+            useVersion("1.6.1-wasm0")
         }
     }
 }
