@@ -1,13 +1,13 @@
 [versions]
-compose = "1.5.10-dev-wasm01"
-composecompiler = "1.5.2.1-rc01"
+compose = "1.5.10-dev-wasm03"
+composecompiler = "1.5.3"
 
 detekt = "1.23.0"
 inject = "0.6.3"
-kotlin = "1.9.20-RC"
-ksp = "1.9.20-RC-1.0.13"
-ktor = "2.3.4"
-serialization = "1.6.0-wasm0"
+kotlin = "1.9.20"
+ksp = "1.9.20-1.0.13"
+ktor = "2.3.6"
+serialization = "1.6.2"
 
 
 [libraries]
