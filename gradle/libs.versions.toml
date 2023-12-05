@@ -1,5 +1,5 @@
 [versions]
-compose = "1.5.10-dev-wasm03"
+compose = "1.6.0-dev1296"
 composecompiler = "1.5.3"
 
 detekt = "1.23.0"
