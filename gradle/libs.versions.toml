@@ -6,7 +6,7 @@ detekt = "1.23.4"
 inject = "0.6.3"
 kotlin = "1.9.21"
 ksp = "1.9.21-1.0.15"
-ktor = "2.3.6"
+ktor = "2.3.7"
 serialization = "1.6.2"
 
 
