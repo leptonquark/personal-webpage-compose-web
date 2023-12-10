@@ -64,9 +64,11 @@ kotlin {
         }
         val jsMain by getting {
             dependencies {
-                implementation(libs.inject.runtime)
                 implementation(libs.bundles.ktor.js)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
+                api(libs.koin.core)
+                api(libs.koin.test)
+                api(libs.koin.annotations)
             }
         }
         val wasmJsMain by getting {
@@ -78,9 +80,13 @@ kotlin {
 }
 
 dependencies {
-    add("kspJs", libs.inject.compiler)
+    add("kspJs", libs.koin.compiler)
 }
 
+ksp {
+    arg("KOIN_CONFIG_CHECK","true")
+    arg("KOIN_DEFAULT_MODULE","false")
+}
 
 compose {
     experimental {
@@ -90,10 +96,8 @@ compose {
 
 detekt {
     config.setFrom("detekt-config.yml")
-    source.setFrom("src/commonMain/kotlin", "src/wasmJsMain/kotlin")
+    source.setFrom("src/commonMain/kotlin",  "src/jsMain/kotlin", "src/wasmJsMain/kotlin")
 }
-
-
 
 project.tasks.whenTaskAdded {
     if (name == "compileCommonMainKotlinMetadata") {
@@ -115,7 +119,6 @@ configurations.all {
             useVersion(libs.versions.kotlin.get())
         }
         // kotlinx-datetime-wasm-js:0.4.1-wasm0 depends on outdated kotlinx-serialization-core:1.5.2-wasm0
-
         if (requested.module.name.contains("kotlinx-serialization") && requested.version == "1.5.2-wasm0") {
             useVersion("1.6.1-wasm0")
         }
