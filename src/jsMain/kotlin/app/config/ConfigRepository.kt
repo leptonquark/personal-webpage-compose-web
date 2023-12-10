@@ -5,7 +5,6 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.Serializable
-import org.koin.core.annotation.InjectedParam
 import org.koin.core.annotation.Single
 
 @Serializable
