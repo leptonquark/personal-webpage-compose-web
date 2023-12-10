@@ -1,4 +1,4 @@
-package app.ui
+package app.ui.theme
 
 import kotlinx.browser.window
 
