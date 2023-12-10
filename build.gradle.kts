@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 import org.jetbrains.kotlin.gradle.targets.js.ir.DefaultIncrementalSyncTask
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -84,6 +83,11 @@ dependencies {
     add("kspJs", libs.koin.compiler)
 }
 
+ksp {
+    arg("KOIN_CONFIG_CHECK","true")
+    arg("KOIN_DEFAULT_MODULE","false")
+}
+
 compose {
     experimental {
         web.application
@@ -92,10 +96,8 @@ compose {
 
 detekt {
     config.setFrom("detekt-config.yml")
-    source.setFrom("src/commonMain/kotlin", "src/wasmJsMain/kotlin")
+    source.setFrom("src/commonMain/kotlin",  "src/jsMain/kotlin", "src/wasmJsMain/kotlin")
 }
-
-
 
 project.tasks.whenTaskAdded {
     if (name == "compileCommonMainKotlinMetadata") {
