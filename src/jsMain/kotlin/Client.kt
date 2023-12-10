@@ -1,9 +1,9 @@
-import di.ClientComponent
-import di.create
+import di.clientModule
+import org.koin.core.context.startKoin
+import start.StartScreen
 
 
 fun main() {
-    val component = ClientComponent::class.create()
-    val startScreen = component.startScreen
-    startScreen.initialize()
+    startKoin { modules(clientModule) }
+    StartScreen().initialize()
 }

@@ -4,11 +4,10 @@ import html.HtmlAttribute
 import html.HtmlElement
 import kotlinx.browser.document
 import kotlinx.dom.createElement
-import me.tatarka.inject.annotations.Inject
 import org.w3c.dom.Document
 import org.w3c.dom.HTMLAnchorElement
 
-class FileDownloadHandler @Inject constructor() {
+class FileDownloadHandler {
     fun download(path: String) {
         document.createDownloadAnchorElement(path).click()
     }

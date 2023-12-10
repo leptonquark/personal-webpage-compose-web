@@ -2,7 +2,6 @@ package start
 
 import config.Config
 import config.ConfigRepository
-import di.Singleton
 import file.FileDownloadHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +9,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
-import me.tatarka.inject.annotations.Inject
 import start.contactme.ContactMeItem
 import start.contactme.url
 import url.ExternalUrlHandler
@@ -29,8 +27,7 @@ sealed interface StartIntent {
 private const val RESUME_URL = "/resume.pdf"
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@Singleton
-class StartViewModel @Inject constructor(
+class StartViewModel (
     configRepository: ConfigRepository,
     private val externalUrlHandler: ExternalUrlHandler,
     private val fileDownloadHandler: FileDownloadHandler,

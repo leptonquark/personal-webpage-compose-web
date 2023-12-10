@@ -4,13 +4,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
-import di.Singleton
-import me.tatarka.inject.annotations.Inject
 import org.jetbrains.skiko.wasm.onWasmReady
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 @OptIn(ExperimentalComposeUiApi::class)
-@Singleton
-class StartScreen @Inject constructor(private val viewModel: StartViewModel) {
+class StartScreen: KoinComponent {
+
+    private val viewModel : StartViewModel by inject()
 
     fun initialize() {
         onWasmReady {
