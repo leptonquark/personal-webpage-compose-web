@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import app.start.contactme.ContactMeItem
 import app.ui.theme.AppTheme
-import app.ui.theme.adjustMobileDensity
 
 @Composable
 internal fun StartView(
@@ -19,20 +18,18 @@ internal fun StartView(
     onContactMeItemClick: (ContactMeItem) -> Unit,
     onDownloadResumeClick: () -> Unit,
 ) {
-    adjustMobileDensity {
-        AppTheme {
-            Box(
-                modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface),
-                contentAlignment = Alignment.Center,
-            ) {
-                ProfileView(
-                    name = name,
-                    emailAddress = emailAddress,
-                    contactMeItems = contactMeItems,
-                    onContactMeItemClick = onContactMeItemClick,
-                    onDownloadResumeClick = onDownloadResumeClick,
-                )
-            }
+    AppTheme {
+        Box(
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface),
+            contentAlignment = Alignment.Center,
+        ) {
+            ProfileView(
+                name = name,
+                emailAddress = emailAddress,
+                contactMeItems = contactMeItems,
+                onContactMeItemClick = onContactMeItemClick,
+                onDownloadResumeClick = onDownloadResumeClick,
+            )
         }
     }
 }
