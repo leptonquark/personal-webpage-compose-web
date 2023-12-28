@@ -15,7 +15,7 @@ class StartScreen: KoinComponent {
 
     fun initialize() {
         onWasmReady {
-            CanvasBasedWindow("CV") {
+            CanvasBasedWindow("Justin Salér") {
                 val state by viewModel.state.collectAsState()
                 StartView(
                     name = state.name,
