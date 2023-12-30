@@ -10,12 +10,14 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.w3c.dom.Document
 
-private const val loaderId = "loader"
+private const val LOADER_ID = "loader"
 
 @OptIn(ExperimentalComposeUiApi::class)
 class StartScreen : KoinComponent {
 
     private val viewModel: StartViewModel by inject()
+
+    private val Document.loader get() = getElementById(LOADER_ID)
 
     fun initialize() {
         onWasmReady {
@@ -32,8 +34,6 @@ class StartScreen : KoinComponent {
             }
         }
     }
-
-    private val Document.loader get() = getElementById(loaderId)
 
     private fun sendIntent(intent: StartIntent) = viewModel.sendIntent(intent)
 }
