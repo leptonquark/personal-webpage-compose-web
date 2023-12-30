@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import app.start.contactme.ContactMeItem
+import app.start.contactme.url
 import app.url.ExternalUrlHandler
 import org.koin.core.annotation.Single
 

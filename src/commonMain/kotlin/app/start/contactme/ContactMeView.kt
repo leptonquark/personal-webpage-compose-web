@@ -27,10 +27,10 @@ internal fun ContactMeView(contactMeItems: Set<ContactMeItem>, onContactMeItemCl
 }
 
 private val ContactMeItem.icon: String
-    get() = when (this) {
-        is ContactMeItem.GitHub -> "images/github.png"
-        is ContactMeItem.LinkedIn -> "images/linkedin.png"
-        is ContactMeItem.X -> "images/x.png"
+    get() = when (contactMePage) {
+        ContactMePage.GitHub -> "images/github.png"
+        ContactMePage.LinkedIn -> "images/linkedin.png"
+        ContactMePage.X -> "images/x.png"
     }
 
 @Composable
