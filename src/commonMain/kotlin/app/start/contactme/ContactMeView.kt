@@ -30,7 +30,7 @@ private val ContactMeItem.icon: String
     get() = when (this) {
         is ContactMeItem.GitHub -> "images/github.png"
         is ContactMeItem.LinkedIn -> "images/linkedin.png"
-        is ContactMeItem.Twitter -> "images/twitter.png"
+        is ContactMeItem.X -> "images/x.png"
     }
 
 @Composable
