@@ -63,7 +63,7 @@ private fun Name(name: String) {
 private fun Role(role: String) {
     Text(
         role,
-        style = MaterialTheme.typography.headlineSmall,
+        style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.onSurface,
     )
 }
