@@ -14,6 +14,7 @@ import app.ui.theme.AppTheme
 internal fun StartView(
     name: String,
     emailAddress: String,
+    role: String,
     contactMeItems: Set<ContactMeItem>,
     onEmailClick: () -> Unit,
     onContactMeItemClick: (ContactMeItem) -> Unit,
@@ -27,6 +28,7 @@ internal fun StartView(
             ProfileView(
                 name = name,
                 emailAddress = emailAddress,
+                role = role,
                 contactMeItems = contactMeItems,
                 onEmailClick = onEmailClick,
                 onContactMeItemClick = onContactMeItemClick,

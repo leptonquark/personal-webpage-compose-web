@@ -11,6 +11,7 @@ import org.koin.core.annotation.Single
 data class Config(
     val name: String,
     val email: String,
+    val role: String,
     val contactMe: List<String>,
 )
 

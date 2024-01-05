@@ -27,6 +27,7 @@ class StartScreen : KoinComponent {
                 StartView(
                     name = state.name,
                     emailAddress = state.emailAddress,
+                    role = state.role,
                     contactMeItems = state.contactMeItems,
                     onEmailClick = { sendIntent(StartIntent.EmailClick) },
                     onContactMeItemClick = { sendIntent(StartIntent.ContactMeItemClick(it)) },
