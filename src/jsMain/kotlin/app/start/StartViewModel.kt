@@ -3,6 +3,7 @@ package app.start
 import app.config.Config
 import app.config.ConfigRepository
 import app.file.FileDownloadHandler
+import app.mail.MailHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,6 +22,7 @@ data class StartState(
 )
 
 sealed interface StartIntent {
+    data object EmailClick : StartIntent
     data class ContactMeItemClick(val item: ContactMeItem) : StartIntent
     data object DownloadResumeClick : StartIntent
 }
@@ -33,6 +35,7 @@ class StartViewModel (
     configRepository: ConfigRepository,
     private val externalUrlHandler: ExternalUrlHandler,
     private val fileDownloadHandler: FileDownloadHandler,
+    private val mailHandler: MailHandler,
 ) {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
@@ -45,6 +48,7 @@ class StartViewModel (
     )
 
     fun sendIntent(intent: StartIntent) = when (intent) {
+        StartIntent.EmailClick -> mailHandler.openMailService(state.value.emailAddress)
         is StartIntent.ContactMeItemClick -> externalUrlHandler.navigateTo(intent.item.url)
         StartIntent.DownloadResumeClick -> fileDownloadHandler.download(RESUME_URL)
     }

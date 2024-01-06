@@ -1,6 +1,7 @@
 package app.start
 
 import ProfilePicture
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -28,6 +29,7 @@ internal fun ProfileView(
     name: String,
     emailAddress: String,
     contactMeItems: Set<ContactMeItem>,
+    onEmailClick: () -> Unit,
     onContactMeItemClick: (ContactMeItem) -> Unit,
     onDownloadResumeClick: () -> Unit,
 ) {
@@ -38,7 +40,7 @@ internal fun ProfileView(
         ProfilePicture(name)
         Spacer(modifier = Modifier.height(Spacing.XS))
         Name(name)
-        EmailAddress(emailAddress)
+        EmailAddress(emailAddress, onEmailClick)
         Spacer(modifier = Modifier.height(Spacing.M))
         ContactMeView(contactMeItems, onContactMeItemClick)
         Spacer(modifier = Modifier.height(Spacing.M))
@@ -47,9 +49,10 @@ internal fun ProfileView(
 }
 
 @Composable
-private fun EmailAddress(emailAddress: String) {
+private fun EmailAddress(emailAddress: String, onEmailClick: () -> Unit) {
     Text(
-        emailAddress,
+        modifier = Modifier.clickable(onClick = onEmailClick),
+        text = emailAddress,
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.primary,
     )
