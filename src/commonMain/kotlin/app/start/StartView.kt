@@ -15,6 +15,7 @@ internal fun StartView(
     name: String,
     emailAddress: String,
     contactMeItems: Set<ContactMeItem>,
+    onEmailClick: () -> Unit,
     onContactMeItemClick: (ContactMeItem) -> Unit,
     onDownloadResumeClick: () -> Unit,
 ) {
@@ -27,6 +28,7 @@ internal fun StartView(
                 name = name,
                 emailAddress = emailAddress,
                 contactMeItems = contactMeItems,
+                onEmailClick = onEmailClick,
                 onContactMeItemClick = onContactMeItemClick,
                 onDownloadResumeClick = onDownloadResumeClick,
             )

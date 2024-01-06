@@ -28,6 +28,7 @@ class StartScreen : KoinComponent {
                     name = state.name,
                     emailAddress = state.emailAddress,
                     contactMeItems = state.contactMeItems,
+                    onEmailClick = { sendIntent(StartIntent.EmailClick) },
                     onContactMeItemClick = { sendIntent(StartIntent.ContactMeItemClick(it)) },
                     onDownloadResumeClick = { sendIntent(StartIntent.DownloadResumeClick) },
                 )
