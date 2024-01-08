@@ -15,12 +15,6 @@ import app.start.contactme.url
 import app.url.ExternalUrlHandler
 import org.koin.core.annotation.Single
 
-data class StartState(
-    val name: String = "",
-    val emailAddress: String = "",
-    val contactMeItems: Set<ContactMeItem> = emptySet(),
-)
-
 sealed interface StartIntent {
     data object EmailClick : StartIntent
     data class ContactMeItemClick(val item: ContactMeItem) : StartIntent
@@ -56,6 +50,7 @@ class StartViewModel (
     private fun Config.getStartState() = StartState(
         name = name,
         emailAddress = email,
+        role = role,
         contactMeItems = contactMe.mapNotNull { url -> ContactMeItem.fromUrl(url) }.toSet(),
     )
 

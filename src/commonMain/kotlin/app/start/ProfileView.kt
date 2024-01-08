@@ -28,6 +28,7 @@ import app.ui.theme.TextContent
 internal fun ProfileView(
     name: String,
     emailAddress: String,
+    role: String,
     contactMeItems: Set<ContactMeItem>,
     onEmailClick: () -> Unit,
     onContactMeItemClick: (ContactMeItem) -> Unit,
@@ -40,6 +41,7 @@ internal fun ProfileView(
         ProfilePicture(name)
         Spacer(modifier = Modifier.height(Spacing.XS))
         Name(name)
+        Role(role)
         EmailAddress(emailAddress, onEmailClick)
         Spacer(modifier = Modifier.height(Spacing.M))
         ContactMeView(contactMeItems, onContactMeItemClick)
@@ -49,21 +51,30 @@ internal fun ProfileView(
 }
 
 @Composable
+private fun Name(name: String) {
+    Text(
+        name,
+        style = MaterialTheme.typography.headlineMedium,
+        color = MaterialTheme.colorScheme.onSurface,
+    )
+}
+
+@Composable
+private fun Role(role: String) {
+    Text(
+        role,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.onSurface,
+    )
+}
+
+@Composable
 private fun EmailAddress(emailAddress: String, onEmailClick: () -> Unit) {
     Text(
         modifier = Modifier.clickable(onClick = onEmailClick),
         text = emailAddress,
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.primary,
-    )
-}
-
-@Composable
-private fun Name(name: String) {
-    Text(
-        name,
-        style = MaterialTheme.typography.headlineMedium,
-        color = MaterialTheme.colorScheme.onSurface,
     )
 }
 
