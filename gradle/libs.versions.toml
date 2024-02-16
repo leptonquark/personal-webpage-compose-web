@@ -20,9 +20,6 @@ ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref =
 ktor-client-js = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }
 ktor-client-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
-
-serialization-wasm = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core-wasm-js", version.ref = "serialization" }
-
 [bundles]
 ktor-js = ["ktor-client-core", "ktor-client-js", "ktor-client-content", "ktor-json"]
 

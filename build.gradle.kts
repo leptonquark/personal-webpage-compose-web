@@ -35,20 +35,6 @@ kotlin {
             }
         }
     }
-    @OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "personal-webpage"
-        browser {
-            commonWebpackConfig {
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-                    static = (devServer?.static ?: mutableListOf()).apply {
-                        add(project.rootDir.path)
-                    },
-                )
-            }
-        }
-        binaries.executable()
-    }
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -71,11 +57,6 @@ kotlin {
                 api(libs.koin.annotations)
             }
         }
-        val wasmJsMain by getting {
-            dependencies {
-                implementation(libs.serialization.wasm)
-            }
-        }
     }
 }
 
@@ -96,21 +77,13 @@ compose {
 
 detekt {
     config.setFrom("detekt-config.yml")
-    source.setFrom("src/commonMain/kotlin",  "src/jsMain/kotlin", "src/wasmJsMain/kotlin")
+    source.setFrom("src/commonMain/kotlin",  "src/jsMain/kotlin")
 }
 
 project.tasks.whenTaskAdded {
     if (name == "compileCommonMainKotlinMetadata") {
         enabled = false
     }
-}
-
-tasks.named<KotlinWebpack>("jsBrowserProductionWebpack") {
-    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmJsProductionExecutableCompileSync"))
-}
-
-tasks.named<Copy>("wasmJsBrowserProductionExecutableDistributeResources") {
-    dependsOn(tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync"))
 }
 
 configurations.all {
